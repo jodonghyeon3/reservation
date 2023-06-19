@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>shop-list</title>
+</head>
+<body>
+
+<tr>
+    <th>상점 이름</th>
+    <th>상점 설명</th>
+    <th>상점 주소</th>
+    <th>위도</th>
+    <th>경도</th>
+</tr>
+<tr th:each="shop: ${shopList}">
+    <td th:text="${shopList.shopName}"></td>
+    <td th:text="${shopList.description}"></td>
+    <td th:text="${shopList.address}"></td>
+    <td th:text="${shopList.lng}"></td>
+    <td th:text="${shopList.lat}"></td>
+</tr>
+</body>
+</html>
