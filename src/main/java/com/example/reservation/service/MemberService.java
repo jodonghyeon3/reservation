@@ -88,9 +88,9 @@ public class MemberService implements UserDetailsService {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 
         if (memberEntity.getIsPartner() == 1) {
-            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-        } else {
             grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_PARTNER"));
+        } else {
+            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
         }
 
         return new User(memberEntity.getUserId(), memberEntity.getPassword(), grantedAuthorities);

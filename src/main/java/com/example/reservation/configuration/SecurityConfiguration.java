@@ -41,6 +41,10 @@ public class SecurityConfiguration {
                 )
                 .permitAll();
 
+        http.authorizeRequests()
+                .antMatchers("/partner/**")
+                .hasAuthority("ROLE_PARTNER");
+
 
         http.formLogin()
                 .loginPage("/login")
@@ -52,6 +56,8 @@ public class SecurityConfiguration {
                 .logoutSuccessUrl("/")
                 .invalidateHttpSession(true);
 
+        http.exceptionHandling()
+                .accessDeniedPage("/error/denied");
 
         return http.build();
     }
