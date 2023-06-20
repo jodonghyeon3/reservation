@@ -14,11 +14,14 @@
     <th>경도</th>
 </tr>
 <tr th:each="shop: ${shopList}">
-    <td th:text="${shopList.shopName}"></td>
-    <td th:text="${shopList.description}"></td>
-    <td th:text="${shopList.address}"></td>
-    <td th:text="${shopList.lng}"></td>
-    <td th:text="${shopList.lat}"></td>
+    <td th:text="${shop.shopName}"></td>
+    <td th:text="${shop.description}"></td>
+    <td th:text="${shop.address}"></td>
+    <td th:text="${shop.lng}"></td>
+    <td th:text="${shop.lat}"></td>
+    <td>
+
+    </td>
 </tr>
 </body>
 </html>

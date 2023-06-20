@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -20,8 +21,15 @@ public class PartnerController {
     private final PartnerService partnerService;
 
 
+    @GetMapping("/main")
+    public String main() {
+        return "/partner/main";
+    }
+
     @GetMapping("/shop/save")
-    public String save() {
+    public String save(HttpSession session) {
+        String userId = (String) session.getAttribute("userId");
+
         return "/partner/shop/save";
     }
 
