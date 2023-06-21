@@ -1,8 +1,8 @@
-package com.example.reservation.controller;
+package com.example.reservation.partner.controller;
 
-import com.example.reservation.data.dto.ShopDTO;
-import com.example.reservation.service.MemberService;
-import com.example.reservation.service.PartnerService;
+import com.example.reservation.partner.data.dto.ShopDTO;
+import com.example.reservation.partner.service.PartnerService;
+import com.example.reservation.partner.service.impl.PartnerServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

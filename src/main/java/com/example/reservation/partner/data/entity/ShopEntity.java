@@ -1,7 +1,6 @@
-package com.example.reservation.data.entity;
+package com.example.reservation.partner.data.entity;
 
-import com.example.reservation.data.dto.MemberDTO;
-import com.example.reservation.data.dto.ShopDTO;
+import com.example.reservation.partner.data.dto.ShopDTO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,6 +16,7 @@ public class ShopEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "SHOP_ID")
     private Long id;
 
     @Column(unique = true)

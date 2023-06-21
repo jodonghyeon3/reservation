@@ -1,6 +1,6 @@
-package com.example.reservation.data.entity;
+package com.example.reservation.member.data.entity;
 
-import com.example.reservation.data.dto.MemberDTO;
+import com.example.reservation.member.data.dto.MemberDTO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,6 +15,7 @@ import javax.persistence.*;
 public class MemberEntity {
 
     @Id
+    @Column(name = "MEMBER_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

@@ -1,6 +1,6 @@
-package com.example.reservation.data.dto;
+package com.example.reservation.member.data.dto;
 
-import com.example.reservation.data.entity.MemberEntity;
+import com.example.reservation.member.data.entity.MemberEntity;
 import lombok.*;
 
 @Getter
