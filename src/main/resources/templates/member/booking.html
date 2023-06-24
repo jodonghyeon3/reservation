@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>상점 예약</title>
+</head>
+<body>
+<h1>상점 예약 확인</h1>
+<table>
+    <tr>
+        <td>
+            <form action="/member/reservation" method="post">
+                <input type="hidden" name="shopName" th:value="${shopName}">
+                <input type="text" name="reservationTime" placeholder="yyyy-mm-dd" required>
+                <input type="submit" value="Register">
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

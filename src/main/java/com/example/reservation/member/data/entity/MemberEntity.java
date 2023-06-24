@@ -1,9 +1,12 @@
 package com.example.reservation.member.data.entity;
 
 import com.example.reservation.member.data.dto.MemberDTO;
+import com.example.reservation.partner.data.entity.ShopEntity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Builder
@@ -15,7 +18,7 @@ import javax.persistence.*;
 public class MemberEntity {
 
     @Id
-    @Column(name = "MEMBER_ID")
+    @Column(name = "member_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -31,9 +34,11 @@ public class MemberEntity {
     @Column
     private String phone;
 
-
     @Column
     private Long isPartner;
+
+    @OneToMany(mappedBy = "memberEntity")
+    private List<ShopEntity> shopEntities = new ArrayList<>();
 
     public MemberDTO toDto() {
         return MemberDTO.builder()

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>예약 현황</title>
+</head>
+<body>
+<form th:action="@{/member/booking}" method="post">
+    <table>
+        <tr>
+            <th>상점 이름</th>
+            <th>상점 설명</th>
+            <th>상점 주소</th>
+            <th>위도</th>
+            <th>경도</th>
+            <th></th>
+        </tr>
+        <tr th:each="shop : ${shopList}">
+            <td th:text="${shop.shopName}"></td>
+            <td th:text="${shop.description}"></td>
+            <td th:text="${shop.address}"></td>
+            <td th:text="${shop.lng}"></td>
+            <td th:text="${shop.lat}"></td>
+            <td>
+                <input type="checkbox" name="shopName" th:value="${shop.shopName}">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <input type="submit" value="예약">
+            </td>
+        </tr>
+
+    </table>
+</form>
+</body>
+</html>

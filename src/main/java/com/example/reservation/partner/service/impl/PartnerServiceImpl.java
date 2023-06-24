@@ -18,13 +18,20 @@ public class PartnerServiceImpl implements PartnerService {
     private final ShopDAO shopDAO;
 
     @Override
-    public void saveShop(ShopDTO shopDTO) {
+    public void saveShop(ShopDTO shopDTO, String userId) {
+
         shopDAO.saveShop(ShopEntity.builder()
                 .shopName(shopDTO.getShopName())
                 .description(shopDTO.getDescription())
                 .address(shopDTO.getAddress())
                 .lng(shopDTO.getLng())
                 .lat(shopDTO.getLat())
-                .build());
+                .build(), userId);
+    }
+
+    @Override
+    public List<ShopDTO> findByUserId(String userId) {
+        return shopDAO.findShopListByUserId(userId);
+
     }
 }

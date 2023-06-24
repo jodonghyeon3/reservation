@@ -51,6 +51,10 @@ public class SecurityConfiguration {
                 .antMatchers("/partner/**") //
                 .hasAuthority("ROLE_PARTNER");
 
+        http.authorizeRequests()
+                .antMatchers("/member/**") //
+                .hasAuthority("ROLE_USER");
+
         // 로그인 페이지 지정 , 로그인 실패 및 성공시 핸들러 호출, 권한 설정
         http.formLogin()
                 .loginPage("/login")

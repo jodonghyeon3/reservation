@@ -1,5 +1,6 @@
 package com.example.reservation.partner.data.entity;
 
+import com.example.reservation.member.data.entity.MemberEntity;
 import com.example.reservation.partner.data.dto.ShopDTO;
 import lombok.*;
 
@@ -16,7 +17,7 @@ public class ShopEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "SHOP_ID")
+    @Column(name = "shop_id")
     private Long id;
 
     @Column(unique = true)
@@ -33,6 +34,10 @@ public class ShopEntity {
 
     @Column
     private Double lat;
+
+    @ManyToOne
+    @JoinColumn(name="member_id")
+    private MemberEntity memberEntity;
 
 
     public ShopDTO toDTO() {
