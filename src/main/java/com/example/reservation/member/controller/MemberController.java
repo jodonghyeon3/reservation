@@ -1,11 +1,13 @@
 package com.example.reservation.member.controller;
 
+import com.example.reservation.member.data.entity.ReservationEntity;
 import com.example.reservation.member.service.MemberService;
 import com.example.reservation.partner.data.dto.ShopDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,4 +53,30 @@ public class MemberController {
 
         return "redirect:/member/main";
     }
+
+    @GetMapping("/reservationList")
+    public String reservationList(Principal principal, Model model) {
+        String userId = principal.getName();
+        List<ReservationEntity> byUserId = memberService.findByUserId(userId);
+        model.addAttribute("reser", byUserId);
+        return "/member/reservationList";
+    }
+
+    @PostMapping("/review")
+    public String reviewPage(@RequestParam("reserId") Long reserId,
+                             Model model) {
+        model.addAttribute("reserId", reserId);
+        return "/member/review";
+    }
+
+    @PostMapping("/reviewComplete")
+    public String reviewComplete(@RequestParam("reserId") Long resId,
+                                 @RequestParam("comments") String comments,
+                                 @RequestParam("star") Long star) {
+
+        memberService.saveReview(resId, comments, star);
+        return "/member/main";
+    }
+
+
 }

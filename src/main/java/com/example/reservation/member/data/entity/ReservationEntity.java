@@ -33,6 +33,9 @@ public class ReservationEntity {
 
     private LocalDate date;
 
+    @OneToOne(mappedBy = "reservationEntity")
+    private ReviewEntity reviewEntity;
+
     @Enumerated(EnumType.STRING)
     private ReservationStatus reservationStatus;
 

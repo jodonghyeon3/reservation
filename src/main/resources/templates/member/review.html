@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>shop-list</title>
+</head>
+<body>
+<form method="post" action="/member/reviewComplete">
+    <h1>리뷰 작성</h1>
+    <input type="hidden" name="reserId" th:value="${reserId}">
+    <input type="text" name="comments" value="리뷰작성" style="width: 300px;height: 200px">
+    <br>
+    <input type="text" name="star" value="별점을 1~5 까지 입력하세요">
+    <input type="submit" value="확인">
+</form>
+
+</body>
+</html>

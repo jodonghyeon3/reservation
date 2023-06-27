@@ -1,5 +1,6 @@
 package com.example.reservation.member.dao;
 
+import com.example.reservation.member.data.entity.ReservationEntity;
 import com.example.reservation.partner.data.dto.ShopDTO;
 
 import java.time.LocalDate;
@@ -12,4 +13,8 @@ public interface MemberDAO {
     List<ShopDTO> shopListAll();
 
     ShopDTO shopInfo(String shopName);
+
+    List<ReservationEntity> findByUserIdFromReservation(String userId);
+
+    void saveReview(Long resId, String comments, Long star);
 }

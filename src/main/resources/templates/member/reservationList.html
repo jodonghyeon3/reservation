@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>reservation-list</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>상점 이름</th>
+        <th>예약 상태</th>
+    </tr>
+    <form action="/member/review" method="post">
+        <tr th:each="reservation : ${reser}">
+            <td th:text="${reservation.shopEntity.shopName}"></td>
+            <td>
+                <input type="hidden" name="reserId" th:value="${reservation.id}">
+            </td>
+            <td>
+                <span th:text="${reservation.reservationStatus}"></span>
+                <input type="submit" value="리뷰 작성" th:if="${reservation.reservationStatus == T(com.example.reservation.ReservationStatus).APPROVE}">
+            </td>
+        </tr>
+    </form>
+</table>
+</body>
+</html>
