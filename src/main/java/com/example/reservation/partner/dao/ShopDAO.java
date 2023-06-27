@@ -10,4 +10,8 @@ public interface ShopDAO {
      List<ShopDTO> findShopListByUserId(String userId);
 
     void saveShop(ShopEntity shopEntity, String userId);
+
+    List<ShopEntity> findReservationListByUserId(String userId);
+
+    void updateStatus(String status, Long reserId);
 }

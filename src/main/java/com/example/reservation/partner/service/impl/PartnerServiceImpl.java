@@ -3,12 +3,10 @@ package com.example.reservation.partner.service.impl;
 import com.example.reservation.partner.dao.ShopDAO;
 import com.example.reservation.partner.data.dto.ShopDTO;
 import com.example.reservation.partner.data.entity.ShopEntity;
-import com.example.reservation.partner.repository.ShopRepository;
 import com.example.reservation.partner.service.PartnerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -34,4 +32,15 @@ public class PartnerServiceImpl implements PartnerService {
         return shopDAO.findShopListByUserId(userId);
 
     }
+
+    @Override
+    public List<ShopEntity> findReservationByUserId(String userId) {
+        return shopDAO.findReservationListByUserId(userId);
+    }
+
+    @Override
+    public void updateStatus(String status, Long reserId) {
+        shopDAO.updateStatus(status, reserId);
+    }
+
 }

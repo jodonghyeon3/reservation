@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>reservation-list</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>상점 이름</th>
+            <th>예약 시간</th>
+            <th>예약 상태</th>
+        </tr>
+        <tr th:each="shop: ${shops}">
+            <td th:text="${shop.shopName}"></td>
+            <td>
+                <table>
+
+                    <tr th:each="reser: ${shop.reservationEntityList}">
+                        <td th:text="${reser.date}"></td>
+                        <td th:text="${reser.reservationStatus}"></td>
+                        <form th:action="@{/partner/shop/reservationStatus}" method="post">
+                        <td>
+                            <select name="status">
+                                <option value="">예약선택</option>
+                                <option value="대기">대기</option>
+                                <option value="승인">승인</option>
+                                <option value="취소">취소</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="hidden" name="reserId" th:value="${reser.id}">
+                        </td>
+                        <td colspan="6">
+                            <input type="submit" value="수정">
+                        </td>
+                        </form>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+    </table>
+
+</body>
+</html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>shop-list</title>
@@ -7,6 +7,7 @@
 <body>
 <form th:action="@{/member/booking}" method="post">
     <table>
+        <thead>
         <tr>
             <th>상점 이름</th>
             <th>상점 설명</th>
@@ -15,6 +16,8 @@
             <th>경도</th>
             <th></th>
         </tr>
+        </thead>
+        <tbody>
         <tr th:each="shop : ${shopList}">
             <td th:text="${shop.shopName}"></td>
             <td th:text="${shop.description}"></td>
@@ -22,16 +25,31 @@
             <td th:text="${shop.lng}"></td>
             <td th:text="${shop.lat}"></td>
             <td>
-                <input type="checkbox" name="shopName" th:value="${shop.shopName}">
+                <input type="radio" name="shopName" th:value="${shop.shopName}">
             </td>
         </tr>
+        </tbody>
+        <tfoot>
         <tr>
             <td colspan="6">
                 <input type="submit" value="예약">
             </td>
         </tr>
-
+        </tfoot>
     </table>
 </form>
+
+<script>
+    document.querySelector('tbody').addEventListener('click', function (event) {
+        if (event.target.tagName === 'INPUT' && event.target.type === 'radio') {
+            var radios = document.querySelectorAll('input[type="radio"]');
+            radios.forEach(function (radio) {
+                if (radio !== event.target) {
+                    radio.checked = false;
+                }
+            });
+        }
+    });
+</script>
 </body>
 </html>

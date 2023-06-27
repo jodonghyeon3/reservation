@@ -1,10 +1,13 @@
 package com.example.reservation.partner.data.entity;
 
 import com.example.reservation.member.data.entity.MemberEntity;
+import com.example.reservation.member.data.entity.ReservationEntity;
 import com.example.reservation.partner.data.dto.ShopDTO;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Builder
@@ -38,6 +41,10 @@ public class ShopEntity {
     @ManyToOne
     @JoinColumn(name="member_id")
     private MemberEntity memberEntity;
+
+    @OneToMany(mappedBy = "shopEntity")
+    private List<ReservationEntity> reservationEntityList = new ArrayList<>();
+
 
 
     public ShopDTO toDTO() {

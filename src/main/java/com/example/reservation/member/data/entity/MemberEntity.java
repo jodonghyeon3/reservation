@@ -40,6 +40,9 @@ public class MemberEntity {
     @OneToMany(mappedBy = "memberEntity")
     private List<ShopEntity> shopEntities = new ArrayList<>();
 
+
+
+
     public MemberDTO toDto() {
         return MemberDTO.builder()
                 .userId(userId)

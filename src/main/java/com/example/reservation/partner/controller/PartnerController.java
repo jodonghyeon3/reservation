@@ -1,6 +1,7 @@
 package com.example.reservation.partner.controller;
 
 import com.example.reservation.partner.data.dto.ShopDTO;
+import com.example.reservation.partner.data.entity.ShopEntity;
 import com.example.reservation.partner.service.PartnerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.util.List;
@@ -49,7 +51,17 @@ public class PartnerController {
     @GetMapping("/shop/reservation")
     public String reservationShop(Model model, Principal principal) {
         String userId = principal.getName();
+        List<ShopEntity> shops = partnerService.findReservationByUserId(userId);
 
+        model.addAttribute("shops", shops);
+        return "/partner/shop/reservationList";
+    }
 
+    @PostMapping("/shop/reservationStatus")
+    public String reservationUpdate(@RequestParam("status") String status, @RequestParam("reserId") Long reserId) {
+
+        partnerService.updateStatus(status, reserId);
+
+        return "redirect:/partner/main";
     }
 }
