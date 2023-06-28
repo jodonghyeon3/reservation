@@ -4,6 +4,7 @@ import com.example.reservation.member.data.entity.ReservationEntity;
 import com.example.reservation.partner.data.dto.ShopDTO;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface MemberService {
@@ -12,7 +13,7 @@ public interface MemberService {
 
     ShopDTO shopInfo(String shopName);
 
-    void reservation(String shopName, LocalDate date, String userId);
+    void reservation(String shopName, LocalDateTime date, String userId);
 
     List<ReservationEntity> findByUserId(String userId);
 

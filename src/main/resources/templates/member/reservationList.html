@@ -8,6 +8,7 @@
 <table>
     <tr>
         <th>상점 이름</th>
+        <th>예약 시간</th>
         <th>예약 상태</th>
     </tr>
 
@@ -16,6 +17,7 @@
         <form action="/member/review" method="post">
             <td>
                 <input type="hidden" name="reserId" th:value="${reservation.id}">
+                <input type="text" name="reserTime" th:value="${reservation.date}" readonly>
             </td>
             <td>
                 <span th:text="${reservation.reservationStatus}"></span>

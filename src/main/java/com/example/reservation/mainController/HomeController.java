@@ -1,9 +1,8 @@
 package com.example.reservation.mainController;
 
 
-import com.example.reservation.member.data.dto.MemberDTO;
 import com.example.reservation.mainService.impl.MainServiceImpl;
-import io.swagger.annotations.ApiParam;
+import com.example.reservation.member.data.dto.MemberDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

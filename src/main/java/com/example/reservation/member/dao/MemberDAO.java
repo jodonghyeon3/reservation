@@ -6,11 +6,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface MemberDAO {
 
-    void reservation(String shopName, LocalDate date, String userId);
+    void reservation(String shopName, LocalDateTime date, String userId);
 
     List<ShopDTO> shopListAll();
 

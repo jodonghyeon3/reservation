@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +33,7 @@ public class MemberDAOImpl implements MemberDAO {
     private final ReviewRepository reviewRepository;
 
     @Override
-    public void reservation(String shopName, LocalDate date, String userId) {
+    public void reservation(String shopName, LocalDateTime date, String userId) {
         Optional<ShopEntity> byShopName = shopRepository.findByShopName(shopName);
         ShopEntity shopEntity = byShopName.orElseThrow(() -> new IllegalArgumentException("상점이 존재하지 않습니다." + shopName));
 

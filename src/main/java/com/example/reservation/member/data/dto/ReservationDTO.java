@@ -6,6 +6,7 @@ import com.example.reservation.member.data.entity.ReservationEntity;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -14,7 +15,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 public class ReservationDTO {
-    private LocalDate date;
+    private LocalDateTime date;
     private ReservationStatus reservationStatus;
 
     public ReservationEntity toEntity() {

@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -33,7 +34,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void reservation(String shopName, LocalDate date, String userId) {
+    public void reservation(String shopName, LocalDateTime date, String userId) {
         memberDAO.reservation(shopName, date, userId);
     }
 

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -44,9 +45,10 @@ public class MemberController {
 
     @PostMapping("/reservation")
     public String makeReservation(@RequestParam("shopName") String shopName,
-                                  @RequestParam("reservationTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+                                  @RequestParam("reservationTime") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") LocalDateTime date,
                                   Model model, Principal principal
     ) {
+        // iso = DateTimeFormat.ISO.DATE
         String userId = principal.getName();
         System.out.println(shopName);
         memberService.reservation(shopName, date, userId);
