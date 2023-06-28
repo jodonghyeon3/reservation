@@ -12,6 +12,7 @@ import com.example.reservation.partner.data.entity.ShopEntity;
 import com.example.reservation.partner.repository.ShopRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import static com.example.reservation.ReservationStatus.WAIT;
 
 @RequiredArgsConstructor
 @Service
+@Transactional
 public class MemberDAOImpl implements MemberDAO {
 
     private final ShopRepository shopRepository;
@@ -32,9 +34,10 @@ public class MemberDAOImpl implements MemberDAO {
     @Override
     public void reservation(String shopName, LocalDate date, String userId) {
         Optional<ShopEntity> byShopName = shopRepository.findByShopName(shopName);
-        ShopEntity shopEntity = byShopName.get();
+        ShopEntity shopEntity = byShopName.orElseThrow(() -> new IllegalArgumentException("상점이 존재하지 않습니다." + shopName));
+
         Optional<MemberEntity> byUserId = memberRepository.findByUserId(userId);
-        MemberEntity memberEntity = byUserId.get();
+        MemberEntity memberEntity = byUserId.orElseThrow(() -> new IllegalArgumentException("유저 이름이 존재하지 않습니다." + userId));
 
         reservationRepository.save(ReservationEntity.builder()
                 .memberEntity(memberEntity)
@@ -53,7 +56,8 @@ public class MemberDAOImpl implements MemberDAO {
     @Override
     public ShopDTO shopInfo(String shopName) {
         Optional<ShopEntity> byShopName = shopRepository.findByShopName(shopName);
-        ShopEntity shopEntity = byShopName.get();
+        ShopEntity shopEntity = byShopName.orElseThrow(() -> new IllegalArgumentException("상점 이름이 없습니다." + shopName));
+
         return ShopDTO.builder()
                 .shopName(shopEntity.getShopName())
                 .description(shopEntity.getDescription())
@@ -65,22 +69,24 @@ public class MemberDAOImpl implements MemberDAO {
 
     @Override
     public List<ReservationEntity> findByUserIdFromReservation(String userId) {
-        MemberEntity memberEntity = memberRepository.findByUserId(userId).get();
+        Optional<MemberEntity> byUserId = memberRepository.findByUserId(userId);
+        MemberEntity memberEntity = byUserId.orElseThrow(() -> new IllegalArgumentException("유저 아이디가 없습니다." + userId));
+
         Long id = memberEntity.getId();
-
-        List<ReservationEntity> byMemberEntityId = reservationRepository.findByMemberEntityId(id);
-
-        return byMemberEntityId;
+        return reservationRepository.findByMemberEntityId(id);
     }
 
     @Override
     public void saveReview(Long resId, String comments, Long star) {
-        ReservationEntity reservationEntity = reservationRepository.findById(resId).get();
-                reviewRepository.save(ReviewEntity.builder()
-                        .reservationEntity(reservationEntity)
-                        .comments(comments)
-                        .star(star)
-                        .build());
+        Optional<ReservationEntity> reservationEntityOptional = reservationRepository.findById(resId);
+        ReservationEntity reservationEntity = reservationEntityOptional.orElseThrow(() -> new IllegalArgumentException("예약 정보가 없습니다." + resId));
+
+        ReviewEntity reviewEntity = ReviewEntity.builder()
+                .reservationEntity(reservationEntity)
+                .comments(comments)
+                .star(star)
+                .build();
+        reviewRepository.save(reviewEntity);
     }
 
     public static List<ShopDTO> getShopDTOS(List<ShopEntity> shopEntityList) {

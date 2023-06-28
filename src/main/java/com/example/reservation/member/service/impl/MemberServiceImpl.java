@@ -2,19 +2,24 @@ package com.example.reservation.member.service.impl;
 
 import com.example.reservation.member.dao.MemberDAO;
 import com.example.reservation.member.data.entity.ReservationEntity;
+import com.example.reservation.member.data.entity.ReviewEntity;
 import com.example.reservation.member.service.MemberService;
 import com.example.reservation.partner.data.dto.ShopDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
+
 @RequiredArgsConstructor
+@Transactional
 @Service
 public class MemberServiceImpl implements MemberService {
 
     private final MemberDAO memberDAO;
-
 
 
     @Override
@@ -29,7 +34,6 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void reservation(String shopName, LocalDate date, String userId) {
-
         memberDAO.reservation(shopName, date, userId);
     }
 

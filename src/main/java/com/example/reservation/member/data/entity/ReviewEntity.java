@@ -14,9 +14,9 @@ import javax.persistence.*;
 public class ReviewEntity {
 
     @Id
+    @Column(name = "review_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private Long star;
 
     private String comments;

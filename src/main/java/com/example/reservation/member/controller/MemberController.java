@@ -65,6 +65,7 @@ public class MemberController {
     @PostMapping("/review")
     public String reviewPage(@RequestParam("reserId") Long reserId,
                              Model model) {
+        System.out.println(reserId);
         model.addAttribute("reserId", reserId);
         return "/member/review";
     }
@@ -74,7 +75,8 @@ public class MemberController {
                                  @RequestParam("comments") String comments,
                                  @RequestParam("star") Long star) {
 
-        memberService.saveReview(resId, comments, star);
+        System.out.println(resId);
+//        memberService.saveReview(resId, comments, star);
         return "/member/main";
     }
 
