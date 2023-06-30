@@ -5,6 +5,7 @@ public enum ReservationStatus {
     APPROVE,
     CANCEL,
     AFTEREAT,
-    CHECKIN
+    CHECKIN,
+    FINISHED
 
 }
