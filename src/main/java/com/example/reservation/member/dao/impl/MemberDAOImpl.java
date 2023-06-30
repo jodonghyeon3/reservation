@@ -14,13 +14,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static com.example.reservation.ReservationStatus.WAIT;
+import static com.example.reservation.type.ReservationStatus.WAIT;
 
 @RequiredArgsConstructor
 @Service
@@ -88,6 +87,31 @@ public class MemberDAOImpl implements MemberDAO {
                 .star(star)
                 .build();
         reviewRepository.save(reviewEntity);
+    }
+
+    @Override
+    public List<ShopDTO> shopListSort(String sort) {
+        List<ShopEntity> allByOrderByStoreNameAsc = shopRepository.findAllByOrderByShopNameAsc();
+        List<ShopDTO> shopDTOList = new ArrayList<>();
+        if (sort.equals("name")) {
+            for (ShopEntity shop : allByOrderByStoreNameAsc) {
+                ShopDTO shopDTO = ShopDTO.builder()
+                        .shopName(shop.getShopName())
+                        .memberEntity(shop.getMemberEntity())
+                        .lng(shop.getLng())
+                        .lat(shop.getLat())
+                        .address(shop.getAddress())
+                        .description(shop.getDescription())
+                        .build();
+                shopDTOList.add(shopDTO);
+            }
+            return shopDTOList;
+        } else if (sort.equals("star")) {
+
+        } else if (sort.equals("dist")) {
+
+        }
+        return null;
     }
 
     public static List<ShopDTO> getShopDTOS(List<ShopEntity> shopEntityList) {

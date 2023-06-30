@@ -3,7 +3,6 @@ package com.example.reservation.member.controller;
 import com.example.reservation.member.data.entity.ReservationEntity;
 import com.example.reservation.member.service.MemberService;
 import com.example.reservation.partner.data.dto.ShopDTO;
-import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,16 +12,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
-@RequiredArgsConstructor
 @RequestMapping("/member")
 public class MemberController {
 
     private final MemberService memberService;
+
+    public MemberController(MemberService memberService) {
+        this.memberService = memberService;
+    }
 
 
     @RequestMapping("/main")
@@ -77,9 +78,17 @@ public class MemberController {
                                  @RequestParam("comments") String comments,
                                  @RequestParam("star") Long star) {
 
-        System.out.println(resId);
-//        memberService.saveReview(resId, comments, star);
+        memberService.saveReview(resId, comments, star);
         return "/member/main";
+    }
+
+    @PostMapping("/listSort")
+    public String listSort(@RequestParam("sort") String sort,
+                           Model model) {
+//        System.out.println(sort);
+        List<ShopDTO> shopDTOList = memberService.sortShopList(sort);
+        model.addAttribute("shopList", shopDTOList);
+        return "/member/list";
     }
 
 

@@ -20,4 +20,6 @@ public interface MemberDAO {
     List<ReservationEntity> findByUserIdFromReservation(String userId) throws UsernameNotFoundException;
 
     void saveReview(Long resId, String comments, Long star);
+
+    List<ShopDTO> shopListSort(String sort);
 }

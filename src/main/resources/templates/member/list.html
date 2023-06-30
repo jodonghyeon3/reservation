@@ -5,6 +5,15 @@
     <title>shop-list</title>
 </head>
 <body>
+<form method="post" action="/member/listSort">
+    <select name="sort">
+        <option value="">정렬선택</option>
+        <option value="name">가나다순</option>
+        <option value="star">별점순</option>
+        <option value="dist">거리순</option>
+    </select>
+    <input type="submit" value="선택">
+</form>
 <form th:action="@{/member/booking}" method="post">
     <table>
         <thead>
@@ -27,6 +36,7 @@
             <td>
                 <input type="radio" name="shopName" th:value="${shop.shopName}">
             </td>
+
         </tr>
         </tbody>
         <tfoot>

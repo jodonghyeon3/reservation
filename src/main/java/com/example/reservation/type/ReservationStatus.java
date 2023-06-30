@@ -1,4 +1,4 @@
-package com.example.reservation;
+package com.example.reservation.type;
 
 public enum ReservationStatus {
     WAIT,

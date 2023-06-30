@@ -18,4 +18,6 @@ public interface MemberService {
     List<ReservationEntity> findByUserId(String userId);
 
     void saveReview(Long resId, String comments, Long star);
+
+    List<ShopDTO> sortShopList(String sort);
 }

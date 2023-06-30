@@ -22,7 +22,7 @@
             <td>
                 <span th:text="${reservation.reservationStatus}"></span>
                 <input type="submit" value="리뷰 작성"
-                       th:if="${reservation.reservationStatus == T(com.example.reservation.ReservationStatus).APPROVE}">
+                       th:if="${reservation.reservationStatus == T(com.example.reservation.type.ReservationStatus).APPROVE}">
             </td>
         </form>
     </tr>

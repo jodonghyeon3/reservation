@@ -2,16 +2,12 @@ package com.example.reservation.member.service.impl;
 
 import com.example.reservation.member.dao.MemberDAO;
 import com.example.reservation.member.data.entity.ReservationEntity;
-import com.example.reservation.member.data.entity.ReviewEntity;
 import com.example.reservation.member.service.MemberService;
 import com.example.reservation.partner.data.dto.ShopDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceException;
 import javax.transaction.Transactional;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -46,5 +42,11 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void saveReview(Long resId, String comments, Long star) {
         memberDAO.saveReview(resId, comments, star);
+    }
+
+    @Override
+    public List<ShopDTO> sortShopList(String sort) {
+        List<ShopDTO> shopDTOList = memberDAO.shopListSort(sort);
+        return shopDTOList;
     }
 }

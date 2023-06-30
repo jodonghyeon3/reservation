@@ -1,14 +1,11 @@
 package com.example.reservation.member.data.entity;
 
-import com.example.reservation.ReservationStatus;
-import com.example.reservation.member.data.dto.MemberDTO;
-import com.example.reservation.member.data.dto.ReservationDTO;
+import com.example.reservation.type.ReservationStatus;
 import com.example.reservation.partner.data.entity.ShopEntity;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor

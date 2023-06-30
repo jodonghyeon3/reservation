@@ -1,11 +1,9 @@
 package com.example.reservation.member.data.dto;
 
-import com.example.reservation.ReservationStatus;
-import com.example.reservation.member.data.entity.MemberEntity;
+import com.example.reservation.type.ReservationStatus;
 import com.example.reservation.member.data.entity.ReservationEntity;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter

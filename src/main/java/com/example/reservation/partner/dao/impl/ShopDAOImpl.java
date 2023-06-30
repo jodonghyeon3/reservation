@@ -1,6 +1,6 @@
 package com.example.reservation.partner.dao.impl;
 
-import com.example.reservation.ReservationStatus;
+import com.example.reservation.type.ReservationStatus;
 import com.example.reservation.member.data.entity.MemberEntity;
 import com.example.reservation.member.data.entity.ReservationEntity;
 import com.example.reservation.member.repository.MemberRepository;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-import static com.example.reservation.ReservationStatus.*;
+import static com.example.reservation.type.ReservationStatus.*;
 import static com.example.reservation.member.dao.impl.MemberDAOImpl.getShopDTOS;
 
 @Service
