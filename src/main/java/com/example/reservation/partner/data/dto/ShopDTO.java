@@ -25,6 +25,8 @@ public class ShopDTO {
 
     private Double lat;
 
+    private Double stars;
+
     @ManyToOne
     @JoinColumn(name ="member_id")
     private MemberEntity memberEntity;

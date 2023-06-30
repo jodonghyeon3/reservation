@@ -23,7 +23,7 @@
             <th>상점 주소</th>
             <th>위도</th>
             <th>경도</th>
-            <th></th>
+            <th>별점</th>
         </tr>
         </thead>
         <tbody>
@@ -33,6 +33,7 @@
             <td th:text="${shop.address}"></td>
             <td th:text="${shop.lng}"></td>
             <td th:text="${shop.lat}"></td>
+            <td th:text="${shop.stars}"></td>
             <td>
                 <input type="radio" name="shopName" th:value="${shop.shopName}">
             </td>

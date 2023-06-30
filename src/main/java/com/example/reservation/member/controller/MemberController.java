@@ -68,8 +68,14 @@ public class MemberController {
     @PostMapping("/review")
     public String reviewPage(@RequestParam("reserId") Long reserId,
                              Model model) {
-        System.out.println(reserId);
         model.addAttribute("reserId", reserId);
+        return "/member/review";
+    }
+
+    @PostMapping("/checkin")
+    public String checkIn(@RequestParam("reserId") Long reserId,
+                             Model model) {
+        memberService.checkIn(reserId);
         return "/member/review";
     }
 

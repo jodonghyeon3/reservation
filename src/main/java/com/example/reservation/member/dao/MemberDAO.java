@@ -22,4 +22,6 @@ public interface MemberDAO {
     void saveReview(Long resId, String comments, Long star);
 
     List<ShopDTO> shopListSort(String sort);
+
+    void checkIn(Long reserId);
 }

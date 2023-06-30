@@ -1,8 +1,10 @@
 package com.example.reservation.member.data.entity;
 
+import com.example.reservation.partner.data.entity.ShopEntity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor
 @Builder
@@ -25,5 +27,9 @@ public class ReviewEntity {
     @JoinColumn(name = "reservation_id")
     private ReservationEntity reservationEntity;
 
+
+    @ManyToOne
+    @JoinColumn(name = "shop_id")
+    private ShopEntity shopEntity;
 
 }

@@ -49,4 +49,9 @@ public class MemberServiceImpl implements MemberService {
         List<ShopDTO> shopDTOList = memberDAO.shopListSort(sort);
         return shopDTOList;
     }
+
+    @Override
+    public void checkIn(Long reserId) {
+        memberDAO.checkIn(reserId);
+    }
 }

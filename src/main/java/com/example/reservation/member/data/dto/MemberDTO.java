@@ -8,7 +8,6 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class MemberDTO {
 
     private String userId;
@@ -22,13 +21,15 @@ public class MemberDTO {
     private Long isPartner;
 
 
-    public MemberEntity toEntity() {
-        return MemberEntity.builder()
-                .userId(userId)
-                .userName(userName)
-                .password(password)
-                .phone(phone)
-                .isPartner(isPartner)
-                .build();
-    }
+
+
+//    public MemberEntity toEntity() {
+//        return MemberEntity.builder()
+//                .userId(userId)
+//                .userName(userName)
+//                .password(password)
+//                .phone(phone)
+//                .isPartner(isPartner)
+//                .build();
+//    }
 }

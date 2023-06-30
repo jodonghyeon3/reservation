@@ -20,4 +20,6 @@ public interface MemberService {
     void saveReview(Long resId, String comments, Long star);
 
     List<ShopDTO> sortShopList(String sort);
+
+    void checkIn(Long reserId);
 }

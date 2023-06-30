@@ -43,14 +43,4 @@ public class MemberEntity {
 
 
 
-    public MemberDTO toDto() {
-        return MemberDTO.builder()
-                .userId(userId)
-                .userName(userName)
-                .password(password)
-                .phone(phone)
-                .isPartner(isPartner)
-                .build();
-    }
-
 }

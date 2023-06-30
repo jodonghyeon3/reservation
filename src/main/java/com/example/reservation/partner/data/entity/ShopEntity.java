@@ -2,6 +2,7 @@ package com.example.reservation.partner.data.entity;
 
 import com.example.reservation.member.data.entity.MemberEntity;
 import com.example.reservation.member.data.entity.ReservationEntity;
+import com.example.reservation.member.data.entity.ReviewEntity;
 import com.example.reservation.partner.data.dto.ShopDTO;
 import lombok.*;
 
@@ -38,6 +39,9 @@ public class ShopEntity {
     @Column
     private Double lat;
 
+    @Column
+    private Double star;
+
     @ManyToOne
     @JoinColumn(name="member_id")
     private MemberEntity memberEntity;
@@ -45,16 +49,7 @@ public class ShopEntity {
     @OneToMany(mappedBy = "shopEntity")
     private List<ReservationEntity> reservationEntityList = new ArrayList<>();
 
-
-
-    public ShopDTO toDTO() {
-        return ShopDTO.builder()
-                .shopName(shopName)
-                .description(description)
-                .address(address)
-                .lng(lng)
-                .lat(lat)
-                .build();
-    }
+    @OneToMany(mappedBy = "shopEntity")
+    private List<ReviewEntity> reviewEntity;
 
 }

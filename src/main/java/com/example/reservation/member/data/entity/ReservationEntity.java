@@ -41,10 +41,4 @@ public class ReservationEntity {
     @Enumerated(EnumType.STRING)
     private ReservationStatus reservationStatus;
 
-//    public ReservationDTO toDto() {
-//        return ReservationDTO.builder()
-//                .date(date)
-//                .reservationStatus(reservationStatus)
-//                .build();
-//    }
 }

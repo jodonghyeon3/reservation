@@ -10,14 +10,13 @@ import com.example.reservation.member.repository.ReviewRepository;
 import com.example.reservation.partner.data.dto.ShopDTO;
 import com.example.reservation.partner.data.entity.ShopEntity;
 import com.example.reservation.partner.repository.ShopRepository;
+import com.example.reservation.type.ReservationStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static com.example.reservation.type.ReservationStatus.WAIT;
 
@@ -64,6 +63,7 @@ public class MemberDAOImpl implements MemberDAO {
                 .address(shopEntity.getAddress())
                 .lng(shopEntity.getLng())
                 .lat(shopEntity.getLat())
+                .stars(shopEntity.getStar())
                 .build();
     }
 
@@ -86,32 +86,53 @@ public class MemberDAOImpl implements MemberDAO {
                 .comments(comments)
                 .star(star)
                 .build();
+        Long shopId = reservationEntity.getShopEntity().getId();
+        ShopEntity shopEntity = shopRepository.findById(shopId).get();
+        List<ReviewEntity> reviewEntityList = shopEntity.getReviewEntity();
+
+        reviewEntityList.add(reviewEntity);
+        shopEntity.setReviewEntity(reviewEntityList);
+
+        double averageStar = reviewEntityList.stream()
+                .mapToLong(ReviewEntity::getStar)
+                .average()
+                .orElse(0.0);
+
+        shopEntity.setStar(averageStar);
+
+        shopRepository.save(shopEntity);
         reviewRepository.save(reviewEntity);
+
     }
 
     @Override
     public List<ShopDTO> shopListSort(String sort) {
-        List<ShopEntity> allByOrderByStoreNameAsc = shopRepository.findAllByOrderByShopNameAsc();
+
         List<ShopDTO> shopDTOList = new ArrayList<>();
         if (sort.equals("name")) {
+            List<ShopEntity> allByOrderByStoreNameAsc = shopRepository.findAllByOrderByShopNameAsc();
             for (ShopEntity shop : allByOrderByStoreNameAsc) {
-                ShopDTO shopDTO = ShopDTO.builder()
-                        .shopName(shop.getShopName())
-                        .memberEntity(shop.getMemberEntity())
-                        .lng(shop.getLng())
-                        .lat(shop.getLat())
-                        .address(shop.getAddress())
-                        .description(shop.getDescription())
-                        .build();
+                ShopDTO shopDTO = createShopDTO(shop);
                 shopDTOList.add(shopDTO);
             }
-            return shopDTOList;
         } else if (sort.equals("star")) {
-
-        } else if (sort.equals("dist")) {
-
+            List<ShopEntity> allByOrderByStarDesc = shopRepository.findAllByOrderByStarDesc();
+            for (ShopEntity shop : allByOrderByStarDesc) {
+                ShopDTO shopDTO = createShopDTO(shop);
+                shopDTOList.add(shopDTO);
+            }
         }
-        return null;
+
+        return shopDTOList;
+    }
+
+    @Override
+    public void checkIn(Long reserId) {
+        ReservationEntity reservationEntity = reservationRepository.findById(reserId).get();
+
+        reservationEntity.setReservationStatus(ReservationStatus.CHECKIN);
+
+        reservationRepository.save(reservationEntity);
     }
 
     public static List<ShopDTO> getShopDTOS(List<ShopEntity> shopEntityList) {
@@ -124,9 +145,22 @@ public class MemberDAOImpl implements MemberDAO {
                     .address(shopEntity.getAddress())
                     .lng(shopEntity.getLng())
                     .lat(shopEntity.getLat())
+                    .stars(shopEntity.getStar())
                     .build();
             shopDTOList.add(shopDTO);
         }
         return shopDTOList;
+    }
+
+    private ShopDTO createShopDTO(ShopEntity shop) {
+        return ShopDTO.builder()
+                .shopName(shop.getShopName())
+                .memberEntity(shop.getMemberEntity())
+                .lng(shop.getLng())
+                .lat(shop.getLat())
+                .address(shop.getAddress())
+                .description(shop.getDescription())
+                .stars(shop.getStar())
+                .build();
     }
 }

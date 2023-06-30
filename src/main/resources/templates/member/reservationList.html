@@ -14,17 +14,22 @@
 
     <tr th:each="reservation : ${reser}">
         <td th:text="${reservation.shopEntity.shopName}"></td>
-        <form action="/member/review" method="post">
-            <td>
+        <td>
+            <input type="text" name="reserTime" th:value="${reservation.date}" readonly>
+        </td>
+        <td>
+            <span th:text="${reservation.reservationStatus}"></span>
+        </td>
+        <td>
+            <form th:action="@{/member/review}" method="post" th:if="${reservation.reservationStatus == T(com.example.reservation.type.ReservationStatus).CHECKIN}">
                 <input type="hidden" name="reserId" th:value="${reservation.id}">
-                <input type="text" name="reserTime" th:value="${reservation.date}" readonly>
-            </td>
-            <td>
-                <span th:text="${reservation.reservationStatus}"></span>
-                <input type="submit" value="리뷰 작성"
-                       th:if="${reservation.reservationStatus == T(com.example.reservation.type.ReservationStatus).APPROVE}">
-            </td>
-        </form>
+                <input type="submit" value="리뷰작성">
+            </form>
+            <form th:action="@{/member/checkin}" method="post" th:if="${reservation.reservationStatus == T(com.example.reservation.type.ReservationStatus).APPROVE}">
+                <input type="hidden" name="reserId" th:value="${reservation.id}">
+                <input type="submit" value="체크인">
+            </form>
+        </td>
     </tr>
 
 </table>
