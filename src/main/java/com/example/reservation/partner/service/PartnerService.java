@@ -1,5 +1,6 @@
 package com.example.reservation.partner.service;
 
+import com.example.reservation.member.data.dto.MemberDTO;
 import com.example.reservation.partner.data.dto.ShopDTO;
 import com.example.reservation.partner.data.entity.ShopEntity;
 
@@ -13,4 +14,6 @@ public interface PartnerService {
     List<ShopEntity> findReservationByUserId(String userId);
 
     void updateStatus(String status, Long reserId);
+
+    MemberDTO findByReservationId(Long resId);
 }

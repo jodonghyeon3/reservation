@@ -1,5 +1,6 @@
 package com.example.reservation.partner.service.impl;
 
+import com.example.reservation.member.data.dto.MemberDTO;
 import com.example.reservation.partner.dao.ShopDAO;
 import com.example.reservation.partner.data.dto.ShopDTO;
 import com.example.reservation.partner.data.entity.ShopEntity;
@@ -41,6 +42,11 @@ public class PartnerServiceImpl implements PartnerService {
     @Override
     public void updateStatus(String status, Long reserId) {
         shopDAO.updateStatus(status, reserId);
+    }
+
+    @Override
+    public MemberDTO findByReservationId(Long resId) {
+        return shopDAO.findByReservationId(resId);
     }
 
 }

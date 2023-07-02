@@ -16,31 +16,31 @@
         <td th:text="${shop.shopName}"></td>
         <td>
             <table>
-                <tr th:each="reser: ${shop.reservationEntityList}">
+                <tr th:each="reser: ${shop.reservationEntityList}" th:if="${reser.reservationStatus != T(com.example.reservation.type.ReservationStatus).FINISHED}">
                     <td th:text="${reser.date}"></td>
                     <td th:text="${reser.reservationStatus}"></td>
-                    <form th:action="@{/partner/shop/reservationStatus}" method="post">
-                        <td>
+                    <td>
+                        <form th:action="@{/partner/shop/reservationStatus}" method="post">
                             <select name="status">
                                 <option value="">예약선택</option>
                                 <option value="대기">대기</option>
                                 <option value="승인">승인</option>
                                 <option value="취소">취소</option>
                             </select>
-                        </td>
-                        <td>
                             <input type="hidden" name="reserId" th:value="${reser.id}">
-                        </td>
-                        <td colspan="6">
                             <input type="submit" value="수정">
+                        </form>
+                    </td>
+                    <form th:action="@{/partner/shop/reserUserList}" method="post">
+                        <td>
+                            <input type="hidden"  name="reserId" th:value="${reser.id}">
+                            <input type="submit" value="예약자 정보">
                         </td>
                     </form>
                 </tr>
             </table>
         </td>
     </tr>
-
 </table>
-
 </body>
 </html>

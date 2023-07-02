@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>유저 상세 정보</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>예약자 이름</th>
+            <th>전화번호</th>
+        </tr>
+        <td th:text="${member.userName}"></td>
+        <td th:text="${member.phone}"></td>
+    </table>
+</body>
+</html>

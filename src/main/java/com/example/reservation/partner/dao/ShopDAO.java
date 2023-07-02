@@ -1,5 +1,6 @@
 package com.example.reservation.partner.dao;
 
+import com.example.reservation.member.data.dto.MemberDTO;
 import com.example.reservation.partner.data.dto.ShopDTO;
 import com.example.reservation.partner.data.entity.ShopEntity;
 
@@ -14,4 +15,6 @@ public interface ShopDAO {
     List<ShopEntity> findReservationListByUserId(String userId);
 
     void updateStatus(String status, Long reserId);
+
+    MemberDTO findByReservationId(Long resId);
 }

@@ -1,5 +1,7 @@
 package com.example.reservation.partner.controller;
 
+import com.example.reservation.member.data.dto.MemberDTO;
+import com.example.reservation.member.data.entity.ReservationEntity;
 import com.example.reservation.partner.data.dto.ShopDTO;
 import com.example.reservation.partner.data.entity.ShopEntity;
 import com.example.reservation.partner.service.PartnerService;
@@ -63,5 +65,14 @@ public class PartnerController {
         partnerService.updateStatus(status, reserId);
 
         return "redirect:/partner/main";
+    }
+
+    @RequestMapping("/shop/reserUserList")
+    public String reserUserList(@RequestParam("reserId") Long resId,
+                                Model model) {
+        MemberDTO member = partnerService.findByReservationId(resId);
+        System.out.println(member.getUserName());
+        model.addAttribute("member", member);
+        return "/partner/shop/reserUserList";
     }
 }

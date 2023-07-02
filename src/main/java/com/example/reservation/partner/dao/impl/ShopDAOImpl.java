@@ -1,5 +1,6 @@
 package com.example.reservation.partner.dao.impl;
 
+import com.example.reservation.member.data.dto.MemberDTO;
 import com.example.reservation.type.ReservationStatus;
 import com.example.reservation.member.data.entity.MemberEntity;
 import com.example.reservation.member.data.entity.ReservationEntity;
@@ -66,5 +67,17 @@ public class ShopDAOImpl implements ShopDAO {
         else if (status.equals("취소")) reserStatus = CANCEL;
         reservationEntity.setReservationStatus(reserStatus);
         reservationRepository.save(reservationEntity);
+    }
+
+    @Override
+    public MemberDTO findByReservationId(Long resId) {
+        ReservationEntity reservationEntity = reservationRepository.findById(resId).get();
+        MemberEntity memberEntity = reservationEntity.getMemberEntity();
+        MemberDTO memberDTO = MemberDTO.builder()
+                .userName(memberEntity.getUserName())
+                .phone(memberEntity.getPhone())
+                .build();
+
+        return memberDTO;
     }
 }
