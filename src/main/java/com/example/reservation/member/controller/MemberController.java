@@ -76,7 +76,7 @@ public class MemberController {
     public String checkIn(@RequestParam("reserId") Long reserId,
                              Model model) {
         memberService.checkIn(reserId);
-        return "/member/review";
+        return "redirect:/member/reservationList";
     }
 
     @PostMapping("/reviewComplete")
